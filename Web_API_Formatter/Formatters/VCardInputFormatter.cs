@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Text;
 using Microsoft.Net.Http.Headers;
 using System.Text;
@@ -30,27 +30,20 @@ namespace WbApiDemo3_22_5.Formatters
 
             try
             {
-
-                await ReadLineAsync("BEGIN:VCARD", reader, context);
-                nameLine = await ReadLineAsync("FN:", reader, context);
-                var split = nameLine.Split(":".ToCharArray());
+                //Id - Fullname - SeriaNo - Age - Score
+                nameLine = await ReadLineAsync( reader, context);
+                var split = nameLine.Split("-".ToCharArray());
                 var student = new StudentAddDTO
                 {
-                    Fullname = split[0] + split[1],
-                };
-                nameLine = await ReadLineAsync("SNO:", reader, context);
-                split = nameLine.Split(":".ToCharArray());
-                student.SeriaNo = split[0];
-                nameLine = await ReadLineAsync("AGE:", reader, context);
-                split = nameLine.Split(":".ToCharArray());
-                student.Age = Int32.Parse(split[1]);
-                nameLine = await ReadLineAsync("SCORE:", reader, context);
-                split = nameLine.Split(":".ToCharArray());
-                student.Score = Int32.Parse(split[1]);
-                await ReadLineAsync("END:VCARD", reader, context);
+
+                    Fullname = split[1].Trim(),
+                    SeriaNo = split[2].Trim(),
+                    Age = Int32.Parse(split[3].Trim()),
+                    Score = Int32.Parse(split[1].Trim()),
+                  };
+              
 
                 return await InputFormatterResult.SuccessAsync(student);
-
             }
             catch (Exception e)
             {
@@ -63,7 +56,7 @@ namespace WbApiDemo3_22_5.Formatters
         }
 
         private static async Task<string> ReadLineAsync(
-    string expectedText, StreamReader reader, InputFormatterContext context)
+     StreamReader reader, InputFormatterContext context, string expectedText = "")
         {
             var line = await reader.ReadLineAsync();
 
