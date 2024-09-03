@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Web_API_Formatter.DTOs;
 using Web_API_Formatter.Entities;
 using Web_API_Formatter.Services.Abstract;
@@ -20,11 +20,11 @@ namespace Web_API_Formatter.Controllers
 
         // GET: api/<StudentController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IEnumerable<StudentDTO>> Get()
         {
             var items = await _studentService.GetAllAsync();
-            if (items != null)
-            {
+            
+            
                 var students = items.Select(s =>
                 {
                     return new StudentDTO
@@ -36,9 +36,9 @@ namespace Web_API_Formatter.Controllers
                         Age = s.Age,
                     };
                 });
-                return Ok(students);
-            }
-            else return BadRequest();
+                return students;
+            
+            
         }
 
         // GET api/<StudentController>/5
@@ -64,20 +64,19 @@ namespace Web_API_Formatter.Controllers
 
         // POST api/<StudentController>
         [HttpPost]
-        public IActionResult Post([FromBody] StudentAddDTO value)
+        public async Task<IActionResult> Post([FromBody] StudentAddDTO value)
         {
-            if (value != null)
+
+            var student = new Student
             {
-                var student = new Student
-                {
-                    Fullname = value.Fullname,
-                    Score = value.Score,
-                    SeriaNo = value.SeriaNo,
-                    Age = value.Age,
-                };
+                Fullname = value.Fullname,
+                Score = value.Score,
+                SeriaNo = value.SeriaNo,
+                Age = value.Age,
+            };
+            await _studentService.AddAsync(student);
                 return Ok(student);
-            }
-            else return BadRequest(value);
+            
 
         }
 
