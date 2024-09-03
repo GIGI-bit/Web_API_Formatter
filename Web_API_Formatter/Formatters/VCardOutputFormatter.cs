@@ -9,7 +9,7 @@ namespace Web_API_Formatter.Formatters
     {
         public VCardOutputFormatter()
         {
-            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/vcard"));
+            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/csv"));
             SupportedEncodings.Add(Encoding.UTF8);
             SupportedEncodings.Add(Encoding.Unicode);
         }
@@ -35,6 +35,10 @@ namespace Web_API_Formatter.Formatters
 
         private void FormatVCard(StringBuilder sb, StudentDTO item)
         {//Id - Fullname - SeriaNo - Age - Score
+<<<<<<< HEAD
+            sb.AppendLine("Id - Fullname - SeriaNo - Age - Score");
+=======
+>>>>>>> 2f2581be48e416258d2862a5b387852b06f500a9
             sb.AppendLine($"{item.Id} - {item.Fullname} - {item.SeriaNo} - {item.Age} - {item.Score}");
             
         }
