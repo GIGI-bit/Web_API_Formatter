@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System.Text;
 using Web_API_Formatter.DTOs;
@@ -34,14 +34,9 @@ namespace Web_API_Formatter.Formatters
         }
 
         private void FormatVCard(StringBuilder sb, StudentDTO item)
-        {
-            sb.AppendLine("BEGIN:VCARD");
-            sb.AppendLine($"FN:{item.Fullname}");
-            sb.AppendLine($"SNO:{item.SeriaNo}");
-            sb.AppendLine($"AGE:{item.Age}");
-            sb.AppendLine($"SCORE:{item.Score}");
-            sb.AppendLine($"UID:{item.Id}");
-            sb.AppendLine("END:VCARD");
+        {//Id - Fullname - SeriaNo - Age - Score
+            sb.AppendLine($"{item.Id} - {item.Fullname} - {item.SeriaNo} - {item.Age} - {item.Score}");
+            
         }
     }
 }
