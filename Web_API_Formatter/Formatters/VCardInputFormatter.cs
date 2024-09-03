@@ -36,17 +36,11 @@ namespace WbApiDemo3_22_5.Formatters
                 var student = new StudentAddDTO
                 {
 
-<<<<<<< HEAD
                     Fullname = split[0].Trim(),
                     SeriaNo = split[1].Trim(),
                     Age = Int32.Parse(split[2].Trim()),
                     Score = Int32.Parse(split[3].Trim()),
-=======
-                    Fullname = split[1].Trim(),
-                    SeriaNo = split[2].Trim(),
-                    Age = Int32.Parse(split[3].Trim()),
-                    Score = Int32.Parse(split[1].Trim()),
->>>>>>> 2f2581be48e416258d2862a5b387852b06f500a9
+                  
                   };
               
 
